@@ -1,0 +1,99 @@
+<head>
+
+<link rel="stylesheet" id="theme" href="https://cdn.jsdelivr.net/gh/volca/markdown-preview/theme/YetAnotherGithub.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/volca/markdown-preview/theme/MarkdownTOC.css">
+</head>
+
+<body>
+
+<p align="center"> 
+<img alt="CrissCross" title="CrissCross" width="25%" src="./assets/images/crisscross_legend.png"> 
+</p>
+
+<h1 style="text-align:center"> 
+      Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity
+      <br>
+      by 
+      <br>
+      <a href="https://www.pritamsarkar.com">Pritam Sarkar</a>  and <a href="https://www.alietemad.com">Ali Etemad</a>
+</h1>
+
+<hr>
+<h3 align="center"> 
+<a href="https://arxiv.org/pdf/">Paper</a> - <a href="https://github.com/pritamqu/CrissCross">Repository</a> - <a href="https://pritamqu.github.io/CrissCross/">Project Page</a> - <a href="https://www.pritamsarkar.com">My Home Page</a>
+</h3>
+<hr>
+
+<p>We present <b>CrissCross</b>, a self-supervised framework for learning audio-visual representations. 
+A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard <i>synchronous</i> cross-modal relations, CrissCross also learns <i>asynchronous</i> cross-modal relationships. 
+We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong time-invariant representations. 
+Our experiments show that strong augmentations for both audio and visual modalities with mild relaxation of cross-modal temporal synchronicity optimizes performance. 
+To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics-400, and AudioSet. 
+The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50).</p>
+
+<h4>Please check our repository to find the codes, pretrained models, and additional details.</h4>
+
+<h3 id="result">Result</h3>
+<p>We present the top-1 accuracy averaged over all the splits of each dataset. Please note the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50.</p>
+<table>
+<thead>
+<tr>
+<th>Pretraining Dataset</th>
+<th>Size</th>
+<th>UCF101</th>
+<th>HMDB51</th>
+<th>ESC50</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kinetics-Sound</td>
+<td>22K</td>
+<td>88.3%</td>
+<td>60.5%</td>
+<td>82.8%</td>
+<td><a href="../weights/vid_crisscross_kinetics_sound.pth.tar">visual</a>; <a href="../weights/aud_crisscross_kinetics_sound.pth.tar">audio</a></td>
+</tr>
+<tr>
+<td>Kinetics400</td>
+<td>240K</td>
+<td>91.5%</td>
+<td>64.7%</td>
+<td>86.8%</td>
+<td><a href="../weights/vid_crisscross_kinetics400.pth.tar">visual</a>; <a href="../weights/aud_crisscross_kinetics400.pth.tar">audio</a></td>
+</tr>
+<tr>
+<td>AudioSet</td>
+<td>1.8M</td>
+<td>92.4%</td>
+<td>66.8%</td>
+<td>90.5%</td>
+<td><a href="../weights/vid_crisscross_audioset.pth.tar">visual</a>; <a href="../weights/aud_crisscross_audioset.pth.tar">audio</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="Qualitative Analysis">Visualization of Retrievals</h3>
+We visualize the nearest neighborhoods of video-to-video and audio-to-audio retrieval. We use Kinetics-400 to pretrain CrissCross. The pretrained backbones are then used to extract feature vectors from Kinetics-Sound. We use the Kinetics-Sound for this experiment as it consists of action classes which are prominently manifested both audibly and visually. Next, we use the features extracted from the validation split to query the training features. 
+Please check the links for visualization:
+<br>
+<a href="./v2v.html">video-to-video retrievals</a> | <a href="./a2a.html">audio-to-audio retrievals</a>.
+    
+<h3 id="citation">Citation</h3>
+<p>Please cite our paper using the given BibTeX entry.</p>
+<pre><code><span class="hljs-attr">@misc{sarkar2021crisscross,</span>
+      <span class="hljs-attr">title</span>=<span class="hljs-string">{Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity}, </span>
+      <span class="hljs-attr">author</span>=<span class="hljs-string">{Pritam Sarkar and Ali Etemad},</span>
+      <span class="hljs-attr">year</span>=<span class="hljs-string">{2021},</span>
+      <span class="hljs-attr">eprint</span>=<span class="hljs-string">{2111.00000},</span>
+      <span class="hljs-attr">archivePrefix</span>=<span class="hljs-string">{arXiv},</span>
+      <span class="hljs-attr">primaryClass</span>=<span class="hljs-string">{cs.LG}</span>
+<span class="hljs-attr">}</span>
+</code></pre>
+<h3 id="acknowledgments">Acknowledgments</h3>
+<p>We are grateful to <strong>Bank of Montreal</strong> and <strong>Mitacs</strong> for funding this research. We are also thankful to <strong>Vector Institute</strong> and <strong>SciNet HPC Consortium</strong> for helping with the computation resources.</p>
+<h3 id="question">Question</h3>
+<ul>
+<li>You may directly contact me at <a href="mailto:pritam.sarkar@queensu.ca">pritam.sarkar@queensu.ca</a> or connect with me on <a href="https://www.linkedin.com/in/sarkarpritam/">LinkedIN</a>.</li>
+</ul>
+
+</body>

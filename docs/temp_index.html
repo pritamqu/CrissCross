@@ -1,0 +1,172 @@
+<head>
+      <link rel="stylesheet" id="theme" href="https://cdn.jsdelivr.net/gh/volca/markdown-preview/theme/Clearness.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/volca/markdown-preview/theme/MarkdownTOC.css">
+
+</head><body><p align="center"> 
+<img alt="CrissCross" title="CrissCross" width="60%" src="./assets/images/crisscross_legend.png"> 
+</p>
+
+<h1 align="center"> 
+Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity
+<br>
+by 
+<br>
+<a href="https://www.pritamsarkar.com">Pritam Sarkar</a>  and <a href="https://www.alietemad.com">Ali Etemad</a>
+</h1>
+
+<h3 align="center"> 
+<a href="https://arxiv.org/pdf/">Paper</a> - <a href="https://github.com/pritamqu/CrissCross">Repository</a> - <a href="https://pritamqu.github.io/CrissCross/">Project Page</a> - <a href="https://www.pritamsarkar.com">My Home Page</a>
+</h3>
+
+<p>We present <b>CrissCross</b>, a self-supervised framework for learning audio-visual representations. 
+A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard <i>synchronous</i> cross-modal relations, CrissCross also learns <i>asynchronous</i> cross-modal relationships. 
+We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong time-invariant representations. 
+Our experiments show that strong augmentations for both audio and visual modalities with mild relaxation of cross-modal temporal synchronicity optimizes performance. 
+To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics-400, and AudioSet. 
+The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50).</p>
+
+
+<h3 id="items-available">Items available</h3>
+<ul>
+<li><input type="checkbox" disabled="" checked=""> Paper</li>
+<li><input type="checkbox" disabled="" checked=""> Model weights</li>
+<li><input type="checkbox" disabled="" checked=""> Evaluation codes</li>
+<li><input type="checkbox" disabled=""> Training codes (will be released upon acceptance)</li>
+</ul>
+<h3 id="result">Result</h3>
+<p>We present the top-1 accuracy averaged over all the splits of each dataset. Please note the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50.</p>
+<table>
+<thead>
+<tr>
+<th>Pretraining Dataset</th>
+<th>Pretraining Size</th>
+<th>UCF101</th>
+<th>HMDB51</th>
+<th>ESC50</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kinetics-Sound</td>
+<td>22K</td>
+<td>88.3%</td>
+<td>60.5%</td>
+<td>82.8%</td>
+<td><a href="../weights/vid_crisscross_kinetics_sound.pth.tar">visual</a>; <a href="../weights/aud_crisscross_kinetics_sound.pth.tar">audio</a></td>
+</tr>
+<tr>
+<td>Kinetics400</td>
+<td>240K</td>
+<td>91.5%</td>
+<td>64.7%</td>
+<td>86.8%</td>
+<td><a href="../weights/vid_crisscross_kinetics400.pth.tar">visual</a>; <a href="../weights/aud_crisscross_kinetics400.pth.tar">audio</a></td>
+</tr>
+<tr>
+<td>AudioSet</td>
+<td>1.8M</td>
+<td>92.4%</td>
+<td>66.8%</td>
+<td>90.5%</td>
+<td><a href="../weights/vid_crisscross_audioset.pth.tar">visual</a>; <a href="../weights/aud_crisscross_audioset.pth.tar">audio</a></td>
+</tr>
+</tbody></table>
+
+
+<h3 id="environment-setup">Environment Setup</h3>
+<p>List of dependencies can be found <a href="./assets/files/requirements.txt">here</a>. You can create an environment as <code>conda create --name crisscross --file requirements.txt</code></p>
+<h3 id="datasets">Datasets</h3>
+<p>Please make sure to keep the datasets in their respective directory, and change the path in <code>/tools/paths</code>. The sources of all the public datasets used in this study are mentioned here.</p>
+<ul>
+<li>AudioSet: Please check this <a href="https://github.com/speedyseal/audiosetdl">repository</a> to download AudioSet.</li>
+<li>Kinetics400: You can either use a crawler (similar to one available for AudioSet) to download the Kinetics400, or simply download from amazon aws, prepared by <a href="https://github.com/cvdfoundation/kinetics-dataset">CVD Foundation</a>.</li>
+<li>UCF101: <a href="https://www.crcv.ucf.edu/data/UCF101.php">Website to download.</a></li>
+<li>HMDB51: <a href="https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/">Website to download.</a></li>
+<li>ESC50: <a href="https://github.com/karolpiczak/ESC-50">Website to download.</a>.</li>
+</ul>
+<h3 id="self-supervised-training">Self-supervised Training</h3>
+<p>Here are few examples, how to train CrissCross in diffierent GPU setup. 
+A batch size of 2048 can be trained on 8 RTX6000 or 8 V100 or similar GPUs.
+To know more about Pytorch distributed training, please see <a href="https://pytorch.org/tutorials/beginner/dist_overview.html">Pytorch official documentation</a>.</p>
+<h4 id="single-gpu">Single GPU</h4>
+<pre><code class="language-python">cd train
+python main_pretext_audiovisual.py \
+            --world-size <span class="hljs-number">1</span> --rank <span class="hljs-number">0</span> \
+            --quiet --sub_dir <span class="hljs-string">'pretext'</span> \
+            --config-file <span class="hljs-string">'audvid_crisscross'</span> \
+            --db <span class="hljs-string">'kinetics400'</span>
+</code></pre>
+<h4 id="single-node-multiple-gpu">Single Node Multiple GPU</h4>
+<pre><code class="language-python"><span class="hljs-comment"># MASTER="127.0.0.1" or HOSTNAME</span>
+<span class="hljs-comment"># MPORT="8888" OR ANY FREE PORT</span>
+cd train
+python main_pretext_audiovisual.py \
+            --dist-url tcp://${MASTER}:${MPORT} \
+            --dist-backend <span class="hljs-string">'nccl'</span> \
+            --multiprocessing-distributed \
+            --world-size <span class="hljs-number">1</span> --rank <span class="hljs-number">0</span> \
+            --quiet --sub_dir <span class="hljs-string">'pretext'</span> \
+            --config-file <span class="hljs-string">'audvid_crisscross'</span> \
+            --db <span class="hljs-string">'kinetics400'</span>
+</code></pre>
+<h4 id="multiple-node-multiple-gpu">Multiple Node Multiple GPU</h4>
+<pre><code class="language-python"><span class="hljs-comment"># MASTER="127.0.0.1" or HOSTNAME</span>
+<span class="hljs-comment"># MPORT="8888" OR ANY FREE PORT</span>
+
+cd train
+<span class="hljs-comment"># Node 0:</span>
+python main_pretext_audiovisual.py \
+            --dist-url tcp://${MASTER}:${MPORT} \
+            --dist-backend <span class="hljs-string">'nccl'</span> \
+            --multiprocessing-distributed \
+            --world-size <span class="hljs-number">2</span> --rank <span class="hljs-number">0</span> \
+            --quiet --sub_dir <span class="hljs-string">'pretext'</span> \
+            --config-file <span class="hljs-string">'audvid_crisscross'</span> \
+            --db <span class="hljs-string">'kinetics400'</span>
+<span class="hljs-comment"># Node 1:</span>
+python main_pretext_audiovisual.py \
+            --dist-url tcp://${MASTER}:${MPORT} \
+            --dist-backend <span class="hljs-string">'nccl'</span> \
+            --multiprocessing-distributed \
+            --world-size <span class="hljs-number">2</span> --rank <span class="hljs-number">1</span> \
+            --quiet --sub_dir <span class="hljs-string">'pretext'</span> \
+            --config-file <span class="hljs-string">'audvid_crisscross'</span> \
+            --db <span class="hljs-string">'kinetics400'</span>
+</code></pre>
+<h3 id="downstream-evaluation">Downstream Evaluation</h3>
+<p>You can directly use the given weights to evaluate on the following benchmarks, using the commands given below. Please make sure to save the model weights to the location at <code>/path/to/model</code>. Downstream evaluation is performed on a single GPU, Nvidia RTX 6000.</p>
+<p><strong>UCF101</strong></p>
+<pre><code class="language-python"><span class="hljs-comment"># 8 frame evaluation</span>
+cd evaluate
+python evaluate/eval_video.py --world-size <span class="hljs-number">1</span> --rank <span class="hljs-number">0</span> --gpu <span class="hljs-number">0</span> --db <span class="hljs-string">'ucf101'</span> --config-file full_ft_8f_fold1 --pretext_model /path/to/model
+<span class="hljs-comment"># 32 frame evaluation</span>
+python eval_video.py --world-size <span class="hljs-number">1</span> --rank <span class="hljs-number">0</span> --gpu <span class="hljs-number">0</span> --db <span class="hljs-string">'ucf101'</span> --config-file full_ft_32f_fold1 --pretext_model /path/to/model
+</code></pre>
+<p><strong>HMDB51</strong></p>
+<pre><code class="language-python"><span class="hljs-comment"># 8 frame evaluation</span>
+cd evaluate
+python eval_video.py --world-size <span class="hljs-number">1</span> --rank <span class="hljs-number">0</span> --gpu <span class="hljs-number">0</span> --db <span class="hljs-string">'hmdb51'</span> --config-file full_ft_8f_fold1 --pretext_model /path/to/model
+<span class="hljs-comment"># 32 frame evaluation</span>
+python eval_video.py --world-size <span class="hljs-number">1</span> --rank <span class="hljs-number">0</span> --gpu <span class="hljs-number">0</span> --db <span class="hljs-string">'hmdb51'</span> --config-file full_ft_32f_fold1 --pretext_model /path/to/model
+</code></pre>
+<p><strong>ESC50</strong></p>
+<pre><code class="language-python"><span class="hljs-comment"># linear evaluation using SVM</span>
+cd evaluate
+python eval_audio.py --world-size <span class="hljs-number">1</span> --rank <span class="hljs-number">0</span> --gpu <span class="hljs-number">0</span> --db <span class="hljs-string">'esc50'</span> --config-file config_fold1_2s --pretext_model /path/to/model
+</code></pre>
+<h3 id="citation">Citation</h3>
+<p>Please cite our paper using the given bibtex entry.</p>
+<pre><code><span class="hljs-attr">@misc{sarkar2021crisscross,</span>
+      <span class="hljs-attr">title</span>=<span class="hljs-string">{Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity}, </span>
+      <span class="hljs-attr">author</span>=<span class="hljs-string">{Pritam Sarkar and Ali Etemad},</span>
+      <span class="hljs-attr">year</span>=<span class="hljs-string">{2021},</span>
+      <span class="hljs-attr">eprint</span>=<span class="hljs-string">{2111.00000},</span>
+      <span class="hljs-attr">archivePrefix</span>=<span class="hljs-string">{arXiv},</span>
+      <span class="hljs-attr">primaryClass</span>=<span class="hljs-string">{cs.LG}</span>
+<span class="hljs-attr">}</span>
+</code></pre>
+<h3 id="acknowledgments">Acknowledgments</h3>
+<p>We are grateful to <strong>Bank of Montreal</strong> and <strong>Mitacs</strong> for funding this research. We are also thankful to <strong>Vector Institute</strong> and <strong>SciNet HPC Consortium</strong> for helping with the computation resources.</p>
+<h3 id="question">Question</h3>
+<p>You may directly contact me at <a href="mailto:pritam.sarkar@queensu.ca">pritam.sarkar@queensu.ca</a> or connect with me on <a href="https://www.linkedin.com/in/sarkarpritam/">LinkedIN</a>.</p>
+</body>

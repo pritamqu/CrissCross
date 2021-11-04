@@ -29,7 +29,7 @@ The learned representations are evaluated on a number of downstream tasks namely
 - [ ] Training codes (will be released upon acceptance)
 
 ### Result
-We present the top-1 accuracy averaged over all the splits of each dataset. Please note the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50.
+We present the top-1 accuracy averaged over all the splits of each dataset. Please note that the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50.
 
 | Pretraining Dataset | Pretraining Size | UCF101 | HMDB51 | ESC50 | Model |
 | --------  |  --------  |-------------- | ---------- | ----- | -------|  
@@ -42,18 +42,18 @@ We present the top-1 accuracy averaged over all the splits of each dataset. Plea
 List of dependencies can be found [here](./docs/assets/files/requirements.txt). You can create an environment as `conda create --name crisscross --file requirements.txt`
 
 ### Datasets
-Please make sure to keep the datasets in their respective directory, and change the path in `/tools/paths`. The sources of all the public datasets used in this study are mentioned here.
+Please make sure to keep the datasets in their respective directories, and change the path in `/tools/paths` accordingly. The sources of all the public datasets used in this study are mentioned here.
 - AudioSet: Please check this [repository](https://github.com/speedyseal/audiosetdl) to download AudioSet.
-- Kinetics400: You can either use a crawler (similar to one available for AudioSet) to download the Kinetics400, or simply download from amazon aws, prepared by [CVD Foundation](https://github.com/cvdfoundation/kinetics-dataset).
+- Kinetics400: You can either use a crawler (similar to the one available for AudioSet) to download the Kinetics400, or simply download from the amazon aws, prepared by [CVD Foundation](https://github.com/cvdfoundation/kinetics-dataset).
 - UCF101: [Website to download.](https://www.crcv.ucf.edu/data/UCF101.php)
 - HMDB51: [Website to download.](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/)
-- ESC50: [Website to download.](https://github.com/karolpiczak/ESC-50).
+- ESC50: [Website to download.](https://github.com/karolpiczak/ESC-50)
 
 ### Self-supervised Training
 
-Here are few examples, how to train CrissCross in diffierent GPU setup. 
-A batch size of 2048 can be trained on 8 RTX6000 or 8 V100 or similar GPUs.
-To know more about Pytorch distributed training, please see [Pytorch official documentation](https://pytorch.org/tutorials/beginner/dist_overview.html).
+Here are a few examples on how to train CrissCross in diffierent GPU setups. 
+A batch size of 2048 can be used to train on 8X  RTX6000 or 8X V100 or similar GPUs. 
+To know more about PyTorch distributed training, please see [Pytorch official documentation](https://pytorch.org/tutorials/beginner/dist_overview.html).
 
 #### Single GPU
 
@@ -110,7 +110,7 @@ python main_pretext_audiovisual.py \
 ```
 
 ### Downstream Evaluation
-You can directly use the given weights to evaluate on the following benchmarks, using the commands given below. Please make sure to save the model weights to the location at `/path/to/model`. Downstream evaluation is performed on a single GPU, Nvidia RTX 6000.
+You can directly use the given weights to evaluate the model on the following benchmarks, using the commands given below. Please make sure to save the model weights to the following location: `/path/to/model`. Downstream evaluation is performed on a single Nvidia RTX 6000 GPU.
 
 **UCF101**
 ```python
@@ -136,7 +136,7 @@ python eval_audio.py --world-size 1 --rank 0 --gpu 0 --db 'esc50' --config-file 
 ```
 
 ### Citation
-Please cite our paper using the given bibtex entry.
+Please cite our paper using the given BibTeX entry.
 ```
 @misc{sarkar2021crisscross,
       title={Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity}, 
@@ -152,4 +152,4 @@ Please cite our paper using the given bibtex entry.
 We are grateful to **Bank of Montreal** and **Mitacs** for funding this research. We are also thankful to **Vector Institute** and **SciNet HPC Consortium** for helping with the computation resources.
 
 ### Question
-You may directly contact me at <pritam.sarkar@queensu.ca> or connect with me on [LinkedIN](https://www.linkedin.com/in/sarkarpritam/).
+You may directly contact me at <pritam.sarkar@queensu.ca> or connect with me on [LinkedIn](https://www.linkedin.com/in/sarkarpritam/).
