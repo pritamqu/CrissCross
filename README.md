@@ -44,7 +44,7 @@ Please make sure to keep the datasets in their respective directories, and chang
 - HMDB51: [Website to download.](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/)
 - ESC50: [Website to download.](https://github.com/karolpiczak/ESC-50)
 
-### Self-supervised Training
+<!-- ### Self-supervised Training
 
 Here are a few examples on how to train CrissCross in diffierent GPU setups. 
 A batch size of 2048 can be used to train on 8X  RTX6000 or 8X V100 or similar GPUs. 
@@ -103,7 +103,7 @@ python main_pretext_audiovisual.py \
             --config-file 'audvid_crisscross' \
             --db 'kinetics400'
 ```
-
+ -->
 ### Downstream Evaluation
 You can directly use the given weights to evaluate the model on the following benchmarks, using the commands given below. Please make sure to save the model weights to the following location: `/path/to/model`. Downstream evaluation is performed on a single Nvidia RTX 6000 GPU.
 
