@@ -4,3 +4,4 @@ src/
 checkpointing/
 weights/
 crisscross/
+temp*
