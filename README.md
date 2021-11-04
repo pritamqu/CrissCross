@@ -23,9 +23,9 @@ The learned representations are evaluated on a number of downstream tasks namely
 
 
 ### Items available
-- [x] Paper
-- [x] Model weights
-- [x] Evaluation codes
+- [ ] Paper
+- [ ] Model weights
+- [ ] Evaluation codes
 - [ ] Training codes (will be released upon acceptance)
 
 ### Result
