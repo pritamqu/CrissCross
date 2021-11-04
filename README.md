@@ -1,21 +1,25 @@
 <p align="center"> 
-<img src="./docs/assets/images/crisscross_legend.png" width=60% title="CrissCross" alt="CrissCross" /> 
+<img src="./docs/assets/images/crisscross_legend.png" width=50% title="CrissCross" alt="CrissCross" /> 
 </p>
 
-<h1 style="text-align:center"> 
-      Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity
-      <br>
-      by 
-      <br>
-      <a href="https://www.pritamsarkar.com">Pritam Sarkar</a>  and <a href="https://www.alietemad.com">Ali Etemad</a>
+<h1 align="center"> 
+Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity
+<br>
+by 
+<br>
+<a href="https://www.pritamsarkar.com">Pritam Sarkar</a>  and <a href="https://www.alietemad.com">Ali Etemad</a>
 </h1>
 
----
 <h3 align="center"> 
 <a href="https://arxiv.org/pdf/">Paper</a> - <a href="https://github.com/pritamqu/CrissCross">Repository</a> - <a href="https://pritamqu.github.io/CrissCross/">Project Page</a> - <a href="https://www.pritamsarkar.com">My Home Page</a>
 </h3>
 
----
+<p>We present <b>CrissCross</b>, a self-supervised framework for learning audio-visual representations. 
+A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard <i>synchronous</i> cross-modal relations, CrissCross also learns <i>asynchronous</i> cross-modal relationships. 
+We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong time-invariant representations. 
+Our experiments show that strong augmentations for both audio and visual modalities with mild relaxation of cross-modal temporal synchronicity optimizes performance. 
+To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics-400, and AudioSet. 
+The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50).</p>
 
 
 ### Items available
@@ -145,7 +149,7 @@ Please cite our paper using the given bibtex entry.
 ```
 
 ### Acknowledgments
-We are grateful to **Bank of Montreal** and **Mitacs** for funding this research. We are also thankful to **[Vector Institute](https://vectorinstitute.ai/)** and **SciNet HPC Consortium** for helping with the computation resources.
+We are grateful to **Bank of Montreal** and **Mitacs** for funding this research. We are also thankful to **Vector Institute** and **SciNet HPC Consortium** for helping with the computation resources.
 
 ### Question
-- You may directly contact me at <pritam.sarkar@queensu.ca> or connect with me on [LinkedIN](https://www.linkedin.com/in/sarkarpritam/).
+You may directly contact me at <pritam.sarkar@queensu.ca> or connect with me on [LinkedIN](https://www.linkedin.com/in/sarkarpritam/).
