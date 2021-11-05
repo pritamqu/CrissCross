@@ -32,6 +32,11 @@ We present the top-1 accuracy averaged over all the splits of each dataset. Plea
 | Kinetics400 | 240K | 91.5% | 64.7% | 86.8% | [visual](../weights/vid_crisscross_kinetics400.pth.tar); [audio](../weights/aud_crisscross_kinetics400.pth.tar)
 | AudioSet | 1.8M | 92.4% | 66.8% | 90.5% | [visual](../weights/vid_crisscross_audioset.pth.tar); [audio](../weights/aud_crisscross_audioset.pth.tar)
 
+### Qualitative Analysis
+We visualize the nearest neighborhoods of video-to-video and audio-to-audio retrieval. We use Kinetics-400 to pretrain CrissCross. The pretrained backbones are then used to extract feature vectors from Kinetics-Sound. We use the Kinetics-Sound for this experiment as it consists of action classes which are prominently manifested both audibly and visually. Next, we use the features extracted from the validation split to query the training features. Please check the links for visualization:
+<br>
+<a href="https://pritamqu.github.io/CrissCross/docs/v2v.html">video-to-video retrievals</a> | <a href="https://pritamqu.github.io/CrissCross/docs/a2a.html">audio-to-audio retrievals</a>.
+    
 
 ### Environment Setup
 List of dependencies can be found [here](./docs/assets/files/requirements.txt). You can create an environment as `conda create --name crisscross --file requirements.txt`
@@ -109,25 +114,30 @@ You can directly use the given weights to evaluate the model on the following be
 
 **UCF101**
 ```python
-# 8 frame evaluation
+# full-finetuning
 cd evaluate
-python evaluate/eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'ucf101' --config-file full_ft_8f_fold1 --pretext_model /path/to/model
+# 8 frame evaluation
+python eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'ucf101' --config-file kinetics400/full_ft_8f_fold1 --pretext_model /path/to/model
 # 32 frame evaluation
-python eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'ucf101' --config-file full_ft_32f_fold1 --pretext_model /path/to/model
+python eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'ucf101' --config-file kinetics400/full_ft_32f_fold1 --pretext_model /path/to/model
 ```
 **HMDB51**
 ```python
-# 8 frame evaluation
+# full-finetuning
 cd evaluate
-python eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'hmdb51' --config-file full_ft_8f_fold1 --pretext_model /path/to/model
+# 8 frame evaluation
+python eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'hmdb51' --config-file kinetics400/full_ft_8f_fold1 --pretext_model /path/to/model
 # 32 frame evaluation
-python eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'hmdb51' --config-file full_ft_32f_fold1 --pretext_model /path/to/model
+python eval_video.py --world-size 1 --rank 0 --gpu 0 --db 'hmdb51' --config-file kinetics400/full_ft_32f_fold1 --pretext_model /path/to/model
 ```
 **ESC50**
 ```python
 # linear evaluation using SVM
 cd evaluate
+# 2-second evaluation
 python eval_audio.py --world-size 1 --rank 0 --gpu 0 --db 'esc50' --config-file config_fold1_2s --pretext_model /path/to/model
+# 5-second evaluation
+python eval_audio.py --world-size 1 --rank 0 --gpu 0 --db 'esc50' --config-file config_fold1_5s --pretext_model /path/to/model
 ```
 
 <!-- ### Citation
