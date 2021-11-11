@@ -18,7 +18,7 @@ We present **CrissCross**, a self-supervised framework for learning audio-visual
 
 
 ### Items available
-- [x] [Paper]()
+- [x] [Paper](https://arxiv.org/pdf/2111.05329.pdf)
 - [x] [Model weights](https://github.com/pritamqu/CrissCross/releases/tag/model_weights)
 - [x] [Evaluation codes](./crisscross/evaluate/)
 - [ ] Training codes (will be released upon acceptance)
