@@ -35,7 +35,7 @@ We present the top-1 accuracy averaged over all the splits of each dataset. Plea
 ### Qualitative Analysis
 We visualize the nearest neighborhoods of video-to-video and audio-to-audio retrieval. We use Kinetics-400 to pretrain CrissCross. The pretrained backbones are then used to extract feature vectors from Kinetics-Sound. We use the Kinetics-Sound for this experiment as it consists of action classes which are prominently manifested both audibly and visually. Next, we use the features extracted from the validation split to query the training features. Please check the links for visualization:
 <br>
-<a href="https://pritamqu.github.io/CrissCross/docs/v2v.html">video-to-video retrievals</a> | <a href="https://pritamqu.github.io/CrissCross/docs/a2a.html">audio-to-audio retrievals</a>.
+<a href="https://pritamqu.github.io/CrissCross/v2v.html">video-to-video retrievals</a> | <a href="https://pritamqu.github.io/CrissCross/a2a.html">audio-to-audio retrievals</a>.
     
 
 ### Environment Setup
