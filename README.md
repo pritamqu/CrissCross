@@ -11,7 +11,7 @@ by
 </h1>
 
 <h3 align="center"> 
-<a href="https://arxiv.org/pdf/2111.05329.pdf>Paper</a> - <a href="https://github.com/pritamqu/CrissCross">Repository</a> - <a href="https://pritamqu.github.io/CrissCross/">Project Page</a> - <a href="https://www.pritamsarkar.com">My Home Page</a>
+<a href="https://arxiv.org/pdf/2111.05329.pdf">Paper</a> - <a href="https://github.com/pritamqu/CrissCross">Repository</a> - <a href="https://pritamqu.github.io/CrissCross/">Project Page</a> - <a href="https://www.pritamsarkar.com">My Home Page</a>
 </h3>
 
 We present **CrissCross**, a self-supervised framework for learning audio-visual representations. A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard *synchronous* cross-modal relations, CrissCross also learns *asynchronous* cross-modal relationships. We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong time-invariant representations. Our experiments show that strong augmentations for both audio and visual modalities with relaxation of cross-modal temporal synchronicity optimize performance. To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics-400, and AudioSet. The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50).
@@ -24,7 +24,7 @@ We present **CrissCross**, a self-supervised framework for learning audio-visual
 - [ ] Training codes (will be released upon acceptance)
 
 ### Result
-We present the top-1 accuracy averaged over all the splits of each dataset. Please note that the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50.
+We present the top-1 accuracy averaged over all the splits of each dataset. Please note that the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50. 
 
 | Pretraining Dataset | Pretraining Size | UCF101 | HMDB51 | ESC50 | Model |
 | --------  |  --------  |-------------- | ---------- | ----- | -------|  
@@ -110,7 +110,7 @@ python main_pretext_audiovisual.py \
 ```
  -->
 ### Downstream Evaluation
-You can directly use the given weights to evaluate the model on the following benchmarks, using the commands given below. Please make sure to save the model weights to the following location: `/path/to/model`. Downstream evaluation is performed on a single Nvidia RTX 6000 GPU.
+You can directly use the given weights to evaluate the model on the following benchmarks, using the commands given below. Please make sure to save the model weights to the following location: `/path/to/model`. Downstream evaluation is performed on a single Nvidia RTX 6000 GPU. Note, codes are tested on a linux machine.
 
 **UCF101**
 ```python
