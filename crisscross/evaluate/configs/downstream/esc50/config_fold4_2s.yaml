@@ -1,0 +1,58 @@
+dataset:
+  batch_size: 64 # extract features 
+  audio_clip_duration: 2
+  audio_fps: 16000.
+  hop_length: 160
+  audio_fps_out: 100
+  n_mels: 80
+  n_fft: 1024
+  fold: 4
+  name: esc50
+  test:
+    # epochs: 1
+    aug_mode: val
+    clips_per_video: 10
+    mode: video
+    split: test-{fold:01d}
+    aud_aug_kwargs:
+        normalize: true
+        trim_pad: true    
+  train:
+
+    aug_mode: train
+    clips_per_video: 100 # size of 10 epochs
+    mode: clip # clip
+    split: train-{fold:01d}
+    aud_aug_kwargs: # ** VJ-MASK-RC-TW **
+        vol: 0.2
+        fmask_len: [0, 10]
+        tmask_len: [0, 20]
+        num_fmask: 2
+        num_tmask: 2
+        wrap_window: 20
+        voljitter: true
+        timewarp: true
+        fmask: true
+        tmask: true
+        randcrop: true
+        normalize: true
+        trim_pad: true
+  aud_transform: strong
+model:
+  svm:
+      cost: [0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 1] # 0.0001
+      iter: 1000
+      scale_features: false # attention
+  audio_backbone: ResNet
+  audio_backbone_args:
+    depth: 18
+    feat_op: conv5x # adaptive_maxpool 4608
+    feat_dim: 4608
+    l2_norm: true # apply l2-norm on extracte features
+    use_bn: true # apply bn on extracte features # bn helps
+name: esc50-svm
+num_workers: 20
+progress:
+  log2tb: false
+  print_freq: 10
+  wandb: true

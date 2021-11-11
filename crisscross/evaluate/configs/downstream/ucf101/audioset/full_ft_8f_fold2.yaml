@@ -1,0 +1,89 @@
+apex: true
+apex_opt_level: O1
+dataset:
+  batch_size: 64
+  clip_duration: 0.5
+  crop_size: 224
+  fold: 2
+  name: ucf101
+  test:
+    aug_mode: val
+    clips_per_video: 1
+    drop_last: false
+    mode: clip
+    split: testlist{fold:02d}
+    use_shuffle: false
+    vid_aug_kwargs:
+      normalize: true
+      pad_missing: true
+      totensor: true
+  test_dense:
+    aug_mode: val
+    clips_per_video: 10
+    drop_last: false
+    mode: video
+    split: testlist{fold:02d}
+    use_shuffle: false
+    vid_aug_kwargs:
+      normalize: true
+      pad_missing: true
+      totensor: true
+  train:
+    aug_mode: train
+    clips_per_video: 10
+    drop_last: true
+    mode: clip
+    split: trainlist{fold:02d}
+    use_shuffle: true
+    vid_aug_kwargs:
+      color:
+      - 0.4
+      - 0.4
+      - 0.4
+      - 0.2
+      cutout_size: 20
+      min_area: 0.08
+      normalize: true
+      num_of_cutout: 1
+      p_blur: 0.0
+      p_cutout: 1.0
+      p_flip: 0.5
+      p_gray: 0.2
+      pad_missing: true
+      totensor: true
+  vid_transform: strong
+  video_fps: 16.0
+model:
+  classifier:
+    dropout: 0.1
+    feat_dim: 512
+    l2_norm: false
+    n_classes: 101
+    use_bn: false
+    use_dropout: true
+  video_backbone: R2Plus1D
+  video_backbone_args:
+    depth: 18
+    feat_op: pool
+    pool: adaptive_maxpool
+name: ucf101-finetune
+num_workers: 20
+optimizer:
+  lr:
+    base_lr: 7.0e-05
+    gamma: 0.1
+    milestones:
+    - 8
+    - 12
+    - 16
+    name: multistep
+    warmup_epochs: 2
+  momentum: 0.9
+  name: sgd
+  num_epochs: 20
+  weight_decay: 0.0
+progress:
+  log2tb: false
+  print_freq: 10
+  wandb: true
+sync_bn: false

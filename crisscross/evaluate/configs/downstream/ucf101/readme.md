@@ -1,0 +1,1 @@
+The finetuning config files for models pretrained with Kinetics-400 and Kinetics-Sound are identical. There are minor differences for AudioSet.
