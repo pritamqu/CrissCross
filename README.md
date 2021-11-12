@@ -44,7 +44,7 @@ List of dependencies can be found [here](./docs/assets/files/requirements.txt). 
 ### Datasets
 Please make sure to keep the datasets in their respective directories, and change the path in `/tools/paths` accordingly. The sources of all the public datasets used in this study are mentioned here.
 - AudioSet: Please check this [repository](https://github.com/speedyseal/audiosetdl) to download AudioSet.
-- Kinetics400: You can either use a crawler (similar to the one available for AudioSet) to download the Kinetics400, or simply download from the amazon aws, prepared by [CVD Foundation](https://github.com/cvdfoundation/kinetics-dataset).
+- Kinetics400: You can either use a crawler (similar to the one available for AudioSet) to download the Kinetics400, or simply download from the Amazon AWS, prepared by [CVD Foundation](https://github.com/cvdfoundation/kinetics-dataset).
 - UCF101: [Website to download.](https://www.crcv.ucf.edu/data/UCF101.php)
 - HMDB51: [Website to download.](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/)
 - ESC50: [Website to download.](https://github.com/karolpiczak/ESC-50)
