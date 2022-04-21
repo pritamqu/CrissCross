@@ -6,7 +6,7 @@
 
 import torch
 from .backbones import R2Plus1D, ResNet
-from .classifier import VideoClassifier, VideoFinetune, Aud_Wrapper
+from .classifier import VideoClassifier, VideoFinetune, Aud_Wrapper, AudioFCtune, AudioClassifier
 
 def get_backbone(backbone, castrate=True):
     backbone = eval(f"{backbone}")

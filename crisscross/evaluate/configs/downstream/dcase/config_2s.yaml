@@ -1,0 +1,88 @@
+apex: true
+apex_opt_level: O1
+dataset:
+  aud_transform: augmented
+  audio_clip_duration: 1
+  audio_fps: 16000.0
+  audio_fps_out: 100
+  batch_size: 512
+  fold: 1
+  hop_length: 160
+  n_fft: 1024
+  n_mels: 80
+  name: dcase
+  test:
+    aud_aug_kwargs:
+      normalize: true
+      trim_pad: false
+    aug_mode: val
+    clips_per_video: 1
+    drop_last: false
+    mode: clip
+    split: val
+    submode: None
+    use_shuffle: false
+  test_dense:
+    aud_aug_kwargs:
+      normalize: true
+      trim_pad: false
+    aug_mode: val
+    clips_per_video: 60
+    drop_last: false
+    mode: video
+    split: val
+    submode: None
+    use_shuffle: false
+  train:
+    aud_aug_kwargs:
+      fmask: true
+      fmask_len:
+      - 0
+      - 10
+      normalize: true
+      num_fmask: 2
+      num_tmask: 2
+      randcrop: true
+      timewarp: true
+      tmask: true
+      tmask_len:
+      - 0
+      - 20
+      trim_pad: true
+      vol: 0.2
+      voljitter: true
+      wrap_window: 20
+    aug_mode: train
+    clips_per_video: 60
+    drop_last: true
+    mode: clip
+    split: train
+    submode: None
+    use_shuffle: true
+model:
+  audio_backbone: ResNet
+  audio_backbone_args:
+    depth: 18
+    feat_op: conv5x
+  classifier:
+    dropout: 0.1
+    feat_dim: 1536
+    l2_norm: true
+    n_classes: 10
+    use_bn: false
+    use_dropout: true
+name: dcase_monitor
+num_workers: 10
+optimizer:
+  lr:
+    base_lr: 0.007
+    name: fixed
+  name: adam
+  num_epochs: 200
+  weight_decay: 1.0e-05
+progress:
+  log2tb: false
+  print_freq: 10
+  wandb: true
+  wandb_all: false
+sync_bn: false

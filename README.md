@@ -1,20 +1,24 @@
-<p align="center"> 
-<img src="./docs/assets/images/crisscross_legend_white_bg.jpg" width=50% title="CrissCross" alt="CrissCross" /> 
-</p>
+<!-- <p align="center">  -->
+<!-- <img src="./docs/assets/images/crisscross_legend_white_bg.jpg" width=50% title="CrissCross" alt="CrissCross" />  -->
+<!-- </p> -->
 
 <h1 align="center"> 
-Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity
-<br>
-by 
-<br>
-<a href="https://www.pritamsarkar.com">Pritam Sarkar</a>  and <a href="https://www.alietemad.com">Ali Etemad</a>
+Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Synchronicity
 </h1>
 
+<h3 align="center">
+Preprint. Under review.
+</h3>
+<h3 align="center">
+<a href="https://www.pritamsarkar.com">Pritam Sarkar</a>
+&nbsp;
+<a href="">Ali Etemad</a>
+</h3>
 <h3 align="center"> 
-<a href="https://arxiv.org/pdf/2111.05329.pdf">Paper</a> - <a href="https://github.com/pritamqu/CrissCross">Repository</a> - <a href="https://pritamqu.github.io/CrissCross/">Project Page</a> - <a href="https://www.pritamsarkar.com">My Home Page</a>
+<a href="https://arxiv.org/pdf/2111.05329.pdf">[Paper]</a>  <a href="https://github.com/pritamqu/CrissCross"> [Repository]</a>  <a href="https://pritamqu.github.io/CrissCross/"> [Project Page]</a>
 </h3>
 
-We present **CrissCross**, a self-supervised framework for learning audio-visual representations. A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard *synchronous* cross-modal relations, CrissCross also learns *asynchronous* cross-modal relationships. We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong time-invariant representations. Our experiments show that strong augmentations for both audio and visual modalities with relaxation of cross-modal temporal synchronicity optimize performance. To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics-400, and AudioSet. The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50).
+We present **CrissCross**, a self-supervised framework for learning audio-visual representations. A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard synchronous cross-modal relations, CrissCross also learns asynchronous cross-modal relationships. We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong generalized representations. Our experiments show that strong augmentations for both audio and visual modalities with relaxation of cross-modal temporal synchronicity optimize performance. To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics400, and AudioSet. The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50 and DCASE). The codes and pretrained models are publicly available.
 
 
 ### Items available
@@ -24,19 +28,14 @@ We present **CrissCross**, a self-supervised framework for learning audio-visual
 - [ ] Training codes (will be released upon acceptance)
 
 ### Result
-We present the top-1 accuracy averaged over all the splits of each dataset. Please note that the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50. 
+We present the top-1 accuracy averaged over all the splits of each dataset. Please note that the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classifier on ESC50 and DCASE. 
 
-| Pretraining Dataset | Pretraining Size | UCF101 | HMDB51 | ESC50 | Model |
-| --------  |  --------  |-------------- | ---------- | ----- | -------|  
-| Kinetics-Sound | 22K | 88.3% | 60.5% | 82.8% | [visual](https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_sound.pth.tar.zip); [audio](https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_sound.pth.tar.zip)
-| Kinetics400 | 240K | 91.5% | 64.7% | 86.8% | [visual](https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_400.pth.tar.zip); [audio](https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_400.pth.tar.zip)
-| AudioSet | 1.8M | 92.4% | 66.8% | 90.5% | [visual](https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_audioset.pth.tar.zip); [audio](https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_audioset.pth.tar.zip)
+| Pretraining Dataset | Pretraining Size | UCF101 | HMDB51 | ESC50 | DCASE | Model |
+| --------  |  --------  |-------------- | ---------- | ----- | -------| -------| 
+| Kinetics-Sound | 22K | 88.3% | 60.5% | 82.8% | 93.0% | [visual](https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_sound.pth.tar.zip); [audio](https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_sound.pth.tar.zip)
+| Kinetics400 | 240K | 91.5% | 64.7% | 86.8% | 96.0% | [visual](https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_400.pth.tar.zip); [audio](https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_400.pth.tar.zip)
+| AudioSet | 1.8M | 92.4% | 66.8% | 90.5% | 97.0% | [visual](https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_audioset.pth.tar.zip); [audio](https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_audioset.pth.tar.zip)
 
-### Qualitative Analysis
-We visualize the nearest neighborhoods of video-to-video and audio-to-audio retrieval. We use Kinetics-400 to pretrain CrissCross. The pretrained backbones are then used to extract feature vectors from Kinetics-Sound. We use the Kinetics-Sound for this experiment as it consists of action classes which are prominently manifested both audibly and visually. Next, we use the features extracted from the validation split to query the training features. Please check the links for visualization:
-<br>
-<a href="https://pritamqu.github.io/CrissCross/v2v.html">video-to-video retrievals</a> | <a href="https://pritamqu.github.io/CrissCross/a2a.html">audio-to-audio retrievals</a>.
-    
 
 ### Environment Setup
 List of dependencies can be found [here](./docs/assets/files/requirements.txt). You can create an environment as `conda create --name crisscross --file requirements.txt`
@@ -48,6 +47,7 @@ Please make sure to keep the datasets in their respective directories, and chang
 - UCF101: [Website to download.](https://www.crcv.ucf.edu/data/UCF101.php)
 - HMDB51: [Website to download.](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/)
 - ESC50: [Website to download.](https://github.com/karolpiczak/ESC-50)
+- DCASE: [Website to download.](https://dcase.community/challenge2013/download#audio-dataset)
 
 <!-- ### Self-supervised Training
 
@@ -139,12 +139,19 @@ python eval_audio.py --world-size 1 --rank 0 --gpu 0 --db 'esc50' --config-file 
 # 5-second evaluation
 python eval_audio.py --world-size 1 --rank 0 --gpu 0 --db 'esc50' --config-file config_fold1_5s --pretext_model /path/to/model
 ```
+**DCASE**
+```python
+# linear evaluation using fc tuning
+cd evaluate
+# 2-second evaluation
+python eval_audio.py --world-size 1 --rank 0 --gpu 0 --db 'dcase' --config-file config_2s --pretext_model /path/to/model
+```
 
 ### Citation
 Please cite our paper using the given BibTeX entry.
 ```
 @misc{sarkar2021crisscross,
-      title={Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity}, 
+      title={Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Synchronicity}, 
       author={Pritam Sarkar and Ali Etemad},
       year={2021},
       eprint={2111.05329},

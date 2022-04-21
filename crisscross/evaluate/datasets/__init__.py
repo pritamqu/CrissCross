@@ -61,7 +61,21 @@ def get_dataset(root, dataset_kwargs, video_transform=None, audio_transform=None
                  mode=dataset_kwargs[split]['mode'],
                  clips_per_audio=dataset_kwargs[split]['clips_per_video'],
             )
-   
+
+   elif name=='dcase':
+        return DCASE(
+            DATA_PATH = os.path.join(root),
+                 subset = dataset_kwargs[split]['split'],
+                 audio_clip_duration=dataset_kwargs['audio_clip_duration'],
+                 audio_fps=dataset_kwargs['audio_fps'],
+                 audio_fps_out=dataset_kwargs['audio_fps_out'],
+                 audio_transform=audio_transform,
+                 return_labels=True,
+                 return_index=True,
+                 mode=dataset_kwargs[split]['mode'],
+                 clips_per_audio=dataset_kwargs[split]['clips_per_video'],
+            )
+        
     else:
         raise NotImplementedError
         

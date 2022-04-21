@@ -1,0 +1,72 @@
+body {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 280;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+a:link,
+a:visited {
+    color: #175e94;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2c8696;
+}
+
+.myGallery {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.myGallery img {
+  width: 100%;
+}
+
+/*
+  And here are some declarations for the image caption.
+  Just hover over one of the last 5 images to see it.
+*/
+
+.myGallery .item {
+  position: relative;
+  overflow: hidden;
+}
+
+.myGallery .item img {
+  vertical-align: middle;
+}
+
+.myGallery .caption {
+  margin: 0;
+  padding: 1em;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  transition: transform 0.5s;
+  transform: translateY(100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
+}
+
+.myGallery .item:hover .caption {
+  transform: translateY(0%);
+}
+
+.verticalLine {
+  border-left: thick solid #000000;
+  display:inline-block;
+}

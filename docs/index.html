@@ -1,93 +1,329 @@
-<head>
+<!DOCTYPE html>
 
-<link rel="stylesheet" id="theme" href="https://cdn.jsdelivr.net/gh/volca/markdown-preview/theme/YetAnotherGithub.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/volca/markdown-preview/theme/MarkdownTOC.css">
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+    google.load("jquery", "1.3.2");
+</script>
+
+<!-- 
+    quick html converter
+    https://htmled.it/
+ -->
+<html>
+
+<head>
+    <title>CrissCross</title>
+    <meta property="og:title"
+        content="Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Synchronicity" />
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <br>
+    <center>
+        <span style="font-size:46px">Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Synchronicity</span>
+        <br><br>
+        <span style="font-size:20px">Preprint. Under review.</span>
+        <br><br>
+        <table align=center>
+            <tr>
+                <span style="font-size:20px"><a href="https://www.pritamsarkar.com">Pritam Sarkar</a></span> 
+                &nbsp;
+                <span style="font-size:20px"><a href="">Ali Etemad</a></span>
+            </tr>
+        </table>
+        
 
-<p align="center"> 
-<img alt="CrissCross" title="CrissCross" width="25%" src="./assets/images/crisscross_legend.png"> 
-</p>
+        <table align=center>
+            <tr>
+                <td align=center>
+                    <center>
+                        <span style="font-size:18px"><a href="https://arxiv.org/pdf/2111.05329.pdf"> [Paper]</a></span>
+                    </center>
+                </td>
+                <td align=center>
+                    <center>
+                        <span style="font-size:18px"><a href="https://github.com/pritamqu/CrissCross"> [Code]</a></span>
+                    </center>
+                </td>
+                <td align=center>
+                    <center>
+                        <span style="font-size:18px"><a href="https://pritamqu.github.io/CrissCross/"> [Project Page]</a></span>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    	  
 
-<h1 style="text-align:center"> 
-      Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity
-      <br>
-      by 
-      <br>
-      <a href="https://www.pritamsarkar.com">Pritam Sarkar</a>  and <a href="https://www.alietemad.com">Ali Etemad</a>
-</h1>
 
-<hr>
-<h3 align="center"> 
-<a href="https://arxiv.org/pdf/2111.05329.pdf">Paper</a> - <a href="https://github.com/pritamqu/CrissCross">Repository</a> - <a href="https://pritamqu.github.io/CrissCross/">Project Page</a> - <a href="https://www.pritamsarkar.com">My Home Page</a>
-</h3>
-<hr>
-
-<p>We present <b>CrissCross</b>, a self-supervised framework for learning audio-visual representations. A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard <i>synchronous</i> cross-modal relations, CrissCross also learns <i>asynchronous</i> cross-modal relationships. We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong time-invariant representations. Our experiments show that strong augmentations for both audio and visual modalities with relaxation of cross-modal temporal synchronicity optimize performance. To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics-400, and AudioSet. The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50).</p>
-
-<h4>Please check our repository to find the codes, pretrained models, and additional details.</h4>
-
-<h3 id="result">Result</h3>
-<p>We present the top-1 accuracy averaged over all the splits of each dataset. Please note that the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classififer (one-vs-all SVM) on ESC50.</p>
-<table>
-<thead>
-<tr>
-<th>Pretraining Dataset</th>
-<th>Pretraining Size</th>
-<th>UCF101</th>
-<th>HMDB51</th>
-<th>ESC50</th>
-<th>Model</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Kinetics-Sound</td>
-<td>22K</td>
-<td>88.3%</td>
-<td>60.5%</td>
-<td>82.8%</td>
-<td><a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_sound.pth.tar.zip">visual</a>; <a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_sound.pth.tar.zip">audio</a></td>
-</tr>
-<tr>
-<td>Kinetics400</td>
-<td>240K</td>
-<td>91.5%</td>
-<td>64.7%</td>
-<td>86.8%</td>
-<td><a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_400.pth.tar.zip">visual</a>; <a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_400.pth.tar.zip">audio</a></td>
-</tr>
-<tr>
-<td>AudioSet</td>
-<td>1.8M</td>
-<td>92.4%</td>
-<td>66.8%</td>
-<td>90.5%</td>
-<td><a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_audioset.pth.tar.zip">visual</a>; <a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_audioset.pth.tar.zip">audio</a></td>
-</tr>
-</tbody></table>
-
-<h3 id="Qualitative Analysis">Qualitative Analysis</h3>
-We visualize the nearest neighborhoods of video-to-video and audio-to-audio retrieval. We use Kinetics-400 to pretrain CrissCross. The pretrained backbones are then used to extract feature vectors from Kinetics-Sound. We use the Kinetics-Sound for this experiment as it consists of action classes which are prominently manifested both audibly and visually. Next, we use the features extracted from the validation split to query the training features. 
-Please check the links for visualization:
-<br>
-<a href="./v2v.html">video-to-video retrievals</a> | <a href="./a2a.html">audio-to-audio retrievals</a>.
+	<!-- <h1>Overview</h1> -->
+    <br><br>
+	<img width="480" alt="CrissCross" title="CrissCross" src="./assets/images/crisscross_legend.png">
     
-<h3 id="citation">Citation</h3>
-<p>Please cite our paper using the given BibTeX entry.</p>
-<pre><code><span class="hljs-attr">@misc{sarkar2021crisscross,</span>
-      <span class="hljs-attr">title</span>=<span class="hljs-string">{Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Temporal Synchronicity}, </span>
-      <span class="hljs-attr">author</span>=<span class="hljs-string">{Pritam Sarkar and Ali Etemad},</span>
-      <span class="hljs-attr">year</span>=<span class="hljs-string">{2021},</span>
-      <span class="hljs-attr">eprint</span>=<span class="hljs-string">{2111.05329},</span>
-      <span class="hljs-attr">archivePrefix</span>=<span class="hljs-string">{arXiv},</span>
-      <span class="hljs-attr">primaryClass</span>=<span class="hljs-string">{cs.CV}</span>
-<span class="hljs-attr">}</span>
-</code></pre>
+    <!--------------------- Abstract --------------------->
+	<table align=center>
+        <center>
+            <h1>
+                Abstract
+            </h1>
+        </center>
+        <tr>
+            <p style="text-align: justify;">
+            We present CrissCross, a self-supervised framework for learning audio-visual representations. A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard synchronous cross-modal relations, CrissCross also learns asynchronous cross-modal relationships. We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong generalized representations. Our experiments show that strong augmentations for both audio and visual modalities with relaxation of cross-modal temporal synchronicity optimize performance. To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics400, and AudioSet. The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50 and DCASE). The codes and pretrained models are publicly available.</p>
+        </tr>
+    </table>
+    <br>
+    <!--------------------- Results --------------------->
+    <table align=center>
+        <center>
+            <h1>
+                Results
+            </h1>
+        </center>
+        <tr>
+            <p style="text-align: justify;">
+            We present the top-1 accuracy averaged over all the splits of each dataset. Please note that the results mentioned below are obtained by full-finetuning on UCF101 and HMDB51, and linear classifier  on ESC50 and DCASE.
+            </p>
+            <br>
+        </tr>
+    </table>
+    <table align="center" style="height: 82px; border-style: solid; border-color: #000000; background-color: #faf9f6; margin-left: auto; margin-right: auto;" border="black">
+        <thead>
+        <tr>
+        <th>Pretraining Dataset</th>
+        <th>Pretraining Size</th>
+        <th>UCF101</th>
+        <th>HMDB51</th>
+        <th>ESC50</th>
+        <th>DCASE</th>
+        <th>Model</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td>Kinetics-Sound</td>
+        <td>22K</td>
+        <td>88.3%</td>
+        <td>60.5%</td>
+        <td>82.8%</td>
+        <td>93.0%</td>
+        <td><a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_sound.pth.tar.zip">visual</a>; <a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_sound.pth.tar.zip">audio</a></td>
+        </tr>
+        <tr>
+        <td>Kinetics400</td>
+        <td>240K</td>
+        <td>91.5%</td>
+        <td>64.7%</td>
+        <td>86.8%</td>
+        <td>96.0%</td>
+        <td><a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_kinetics_400.pth.tar.zip">visual</a>; <a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_kinetics_400.pth.tar.zip">audio</a></td>
+        </tr>
+        <tr>
+        <td>AudioSet</td>
+        <td>1.8M</td>
+        <td>92.4%</td>
+        <td>66.8%</td>
+        <td>90.5%</td>
+        <td>97.0%</td>
+        <td><a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_audioset.pth.tar.zip">visual</a>; <a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_audioset.pth.tar.zip">audio</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <!--------------------- Qualitative Analysis --------------------->
 
-<h3 id="acknowledgments">Acknowledgments</h3>
-<p>We are grateful to <strong>Bank of Montreal</strong> and <strong>Mitacs</strong> for funding this research. We are also thankful to <strong>Vector Institute</strong> and <strong>SciNet HPC Consortium</strong> for helping with the computation resources.</p>
-<h3 id="question">Question</h3>
-You may directly contact me at <a href="mailto:pritam.sarkar@queensu.ca">pritam.sarkar@queensu.ca</a> or connect with me on <a href="https://www.linkedin.com/in/sarkarpritam/">LinkedIn</a>.</li>
+	<table align=center width=1250px>
+        <center>
+            <h1>
+                Qualitative Analysis
+            </h1>
+        </center>
+        <tr>
+            <p style="text-align: justify;">
+            We visualize the nearest neighborhoods of video-to-video and audio-to-audio retrieval. We use Kinetics-400 to pretrain CrissCross. The pretrained backbones are then used to extract feature vectors from Kinetics-Sound. We use the Kinetics-Sound for this experiment as it consists of action classes which are prominently manifested both audibly and visually. Next, we use the features extracted from the validation split to query the training features. 
+            </p>
+            <br>
+        </tr>
+    </table>
+    <table align=center width=1250px>
+        <h2 align="center">
+        Video-to-Video Retrievals
+        </h2>
+        <h4 align="center">
+        The left most video in each row represents the query, and the next 5 videos represent the top-5 neighborhoods.
+        Please see in full-screen for better visibility.
+        </h4>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/-d7gxstQux4" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/hQbgSWRgG0w" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/3ZAdEZunYTA" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/IDsdycW4cVE" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/0KqTLFQ6FTs" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/psyeW4ur94I" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/ZRkNx8RWKqg" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/sxzNN9hfbSk" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/9CuWxkQAZ4A" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/iR9H8SzNbMs" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/Dc_sFmNLMHk" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/0DsJ7Saj2eQ" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/_cDPlZP2UVw" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/uSMilNFMGTY" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/i9xBcKUygpM" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/sIdPfXCPRM0" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/D4MgX6FI2VE" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/KIToR836yoQ" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/WE03bw7IHt0" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/AbakMFrR4z0" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/a5GVsR6NSag" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/So7EyZ1ficM" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/pdTpiNQp4iI" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/AF_BigLCvfo" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/zvMPX99N2IE" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/Hu4e6Y8cvxU" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/klvV1VFUR_w" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/CT1ZUdWexsw" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/OOsTaESuo8E" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/VRHJ7cT_cyU" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/WiWGuBFHcuE" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/WMOpbw_pSsQ" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/11vm6DICgWo" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/2sFIwVeJIv4" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/aDhwLaVUw90" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/kXf2HyxZSt4" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
 
-</body>
+        </table>
+	</table>
+	
+
+    <table align=center width=1250px>
+        <h2 align="center">
+        Audio-to-Audio Retrievals
+        </h2>
+        <h4 align="center">
+        The left most video in each row represents the query, and the next 5 videos represent the top-5 neighborhoods.
+        Please see in full-screen for better visibility.
+        </h4>
+         <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/tSKKYB6t51g" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/la7rQHNfL_o" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/I_-a9D-hCo0" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6SvQVtZTItA" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/h5DWe7Y5hwA" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/3da2_dDLqSM" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/ZlVNRxRSQx8" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/yxn0mrzLmgA" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/l_CbtxRYnZk" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/7t8m6z4TJWA" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/J71zx8yzR-k" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/-fS4i4rRVCo" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/YXUsljH4iz8" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/-acnXbfOk_M" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/VPcS_aO20Ns" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/8apz96O2hL0" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/pc2NrDk_gwc" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/CnukEn38Faw" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/_eVCAsZxcPw" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/ukl_lrQAMGs" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/2VjkKTSsXEY" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/5bM3yS8Rv3I" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/AUKG2OXegog" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/KuKxoq60R6U" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/Rmr7HeQfHT8" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/FrftTpIt0rI" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/9Tzej8XKqfA" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/EdJSqpc-CGY" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/_JWNFGmIgH4" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/RwIAqV-xjxs" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+        <div class="myGallery">
+        <iframe src="https://www.youtube.com/embed/z5jLp8ruSXU" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/4A_Q1dM8l3s" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6ZHjVQzC8BE" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/Aw8j91xjt38" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/nTfEWTlcqrA" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/SYUGdsXq-og" width="150" height="150" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+    </table>
+
+    <!--------------------- citation --------------------->
+    <table align=center>
+        <center>
+            <h1>
+                Citation
+            </h1>
+        </center>
+        <tr>
+            <p style="text-align: center;">
+            Please cite our paper using the given BibTeX entry.
+            </p>
+            <br>
+        </tr>
+    </table>
+    <table border="0" style="height: 134px; width: 100%; border-collapse: collapse; background-color: #faf9f6; border-color: #000000; border-style: inset; margin-left: auto; margin-right: auto;" height="134">
+        <tbody>
+            <tr>
+            <td style="width: 100%;"><code>@misc{sarkar2021crisscross,</code><br /><code>title={Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Synchronicity}, </code><br /><code>author={Pritam Sarkar and Ali Etemad},</code><br /><code>year={2021},</code><br /><code>eprint={2111.05329},</code><br /><code>archivePrefix={arXiv},</code><br /><code>primaryClass={cs.CV}}</code><br /></td>
+            </tr>
+        </tbody>
+    </table>
+
+	<br> <br> <hr>
+    <!--------------------- acknowledgement --------------------->
+    <table align=center width=950px>
+        <center>
+            <h1>
+                Acknowledgements
+            </h1>
+        </center>
+        <tr>
+            <p>We are grateful to <strong>Bank of Montreal</strong> and <strong>Mitacs</strong> for funding this research. We are also thankful to <strong>Vector Institute</strong> and <strong>SciNet HPC Consortium</strong> for helping with the computation resources.</p>
+        </tr>
+    </table>
+    
+    <!--------------------- Question --------------------->    
+
+    <table align=center width=950px>
+        <center>
+            <h1>
+                Question
+            </h1>
+        </center>
+        <tr>
+            <p>
+                You may directly contact me at <a href="mailto:pritam.sarkar@queensu.ca">pritam.sarkar@queensu.ca</a> or connect with me on <a href="https://www.linkedin.com/in/sarkarpritam/">LinkedIn</a>.
+            </p>
+        </tr>
+    </table>
+	
+</html>
+

@@ -8,7 +8,7 @@ import os
 
 def my_paths(server, db):
 
-    if server == 'vector':
+    if server == 'location':
         output_dir = '/scratch/ssd002/home/pritam/projects/OUTPUTS'
         data_dir = fetch_db(db)
     else:
@@ -24,7 +24,8 @@ def fetch_db(db):
         return '/scratch/ssd004/datasets/HMDB51'
     elif db == 'esc50':
         return '/scratch/ssd004/datasets/ESC-50'
-    
+    elif db == 'dcase':
+        return '/scratch/ssd004/datasets/DCASE'
     else:
         raise NotImplementedError
 

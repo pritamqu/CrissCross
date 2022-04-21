@@ -10,22 +10,22 @@ from sklearn.svm import LinearSVC
 from sklearn import preprocessing
 from evaluate import set_grad, Feature_Bank
 from datasets.augmentations import get_aud_aug
-from datasets import get_dataset, dataloader, FetchSubset        
+from datasets import get_dataset, dataloader
 from tools import environment as environ
 from models import get_backbone, Aud_Wrapper
 
 
 def linear_svm(args, cfg, backbone_state_dict, logger, tb_writter, wandb_writter):
-    
+
     if args.debug:
         cfg, args = environ.set_debug_mode(cfg, args)
-        
-    # get backbone    
+
+    # get backbone
     model = get_backbone(cfg['model']['audio_backbone'])(cfg['model']['audio_backbone_args']['depth'])
-    model = Aud_Wrapper(model,                         
+    model = Aud_Wrapper(model,
                         feat_op=cfg['model']['audio_backbone_args']['feat_op'],
-                        feat_dim=cfg['model']['audio_backbone_args']['feat_dim'], 
-                        l2_norm=cfg['model']['audio_backbone_args']['l2_norm'], 
+                        feat_dim=cfg['model']['audio_backbone_args']['feat_dim'],
+                        l2_norm=cfg['model']['audio_backbone_args']['l2_norm'],
                         use_bn=cfg['model']['audio_backbone_args']['use_bn']
                         )
     ## load weights
@@ -56,26 +56,26 @@ def linear_svm(args, cfg, backbone_state_dict, logger, tb_writter, wandb_writter
                                     hop_length=cfg['dataset']['hop_length'],
                                     mode=cfg['dataset']['test']['aug_mode'],
                                     aug_kwargs=cfg['dataset']['test']['aud_aug_kwargs'])
-    
+
     # dataset
     train_dataset = get_dataset(root=args.data_dir,
                                 dataset_kwargs=cfg['dataset'],
-                                audio_transform=train_transformations, 
+                                audio_transform=train_transformations,
                                 split='train')
 
     val_dataset = get_dataset(root=args.data_dir,
                                 dataset_kwargs=cfg['dataset'],
-                                audio_transform=val_transformations, 
-                                split='test')                
+                                audio_transform=val_transformations,
+                                split='test')
     # dataloader
-    train_loader = dataloader.make_dataloader(dataset=train_dataset, 
+    train_loader = dataloader.make_dataloader(dataset=train_dataset,
                                               batch_size=cfg['dataset']['batch_size'],
                                               use_shuffle=False,
                                               drop_last=False,
                                               num_workers=cfg['num_workers'],
                                               distributed=False)
 
-    val_loader = dataloader.make_dataloader(dataset=val_dataset, 
+    val_loader = dataloader.make_dataloader(dataset=val_dataset,
                                           batch_size=cfg['dataset']['batch_size'],
                                           use_shuffle=False,
                                           drop_last=False,
@@ -90,17 +90,17 @@ def linear_svm(args, cfg, backbone_state_dict, logger, tb_writter, wandb_writter
 
     train_features, train_labels, train_indexs = train_features.numpy(), train_labels.numpy(), train_indexs.numpy()
     val_features, val_labels, val_indexs = val_features.numpy(), val_labels.numpy(), val_indexs.numpy()
-    
+
     best_top1=0.0
     logger.add_line("Running SVM...")
-    logger.add_line(f"train_feat size: {train_features.shape}")     
+    logger.add_line(f"train_feat size: {train_features.shape}")
     logger.add_line(f"val_feat size: {val_features.shape}")
     if isinstance(cfg['model']['svm']['cost'], list): # sweep a list of cost values
         for cost in cfg['model']['svm']['cost']:
             clip_top1, clip_top5 = _compute(cost, cfg, logger,
-             train_features, train_labels, train_indexs, 
+             train_features, train_labels, train_indexs,
              val_features, val_labels, val_indexs,)
-            
+
             if tb_writter is not None:
                 tb_writter.add_scalar('Epoch/aud_svm_top1', clip_top1, cost)
                 tb_writter.add_scalar('Epoch/aud_svm_top5', clip_top5, cost)
@@ -116,7 +116,7 @@ def linear_svm(args, cfg, backbone_state_dict, logger, tb_writter, wandb_writter
     else:
         cost = cfg['model']['svm']['cost']
         best_top1, best_top5 = _compute(cost, cfg, logger,
-             train_features, train_labels, train_indexs, 
+             train_features, train_labels, train_indexs,
              val_features, val_labels, val_indexs,)
 
     logger.add_line(f'Best Acc: top1: {best_top1} - top5: {best_top5}')
@@ -127,21 +127,21 @@ def linear_svm(args, cfg, backbone_state_dict, logger, tb_writter, wandb_writter
     if wandb_writter is not None:
         wandb_writter.log({'Epoch/aud_svm_best1': best_top1, 'custom_step': 1})
         wandb_writter.log({'Epoch/aud_svm_best5': best_top5, 'custom_step': 1})
-        
-    torch.cuda.empty_cache()       
+
+    torch.cuda.empty_cache()
     return
 
 def _compute(cost, cfg, logger,
-             train_features, train_labels, train_indexs, 
-             val_features, val_labels, val_indexs, 
+             train_features, train_labels, train_indexs,
+             val_features, val_labels, val_indexs,
              test_phase='test_dense'):
-    
+
     # normalize
-    if cfg['model']['svm']['scale_features']:   
+    if cfg['model']['svm']['scale_features']:
         scaler = preprocessing.StandardScaler().fit(train_features)
-        train_features = scaler.transform(train_features)   
+        train_features = scaler.transform(train_features)
         # val_features = scaler.transform(val_features)
-    
+
     classifier = LinearSVC(C=cost, max_iter=cfg['model']['svm']['iter'])
     classifier.fit(train_features, train_labels.ravel())
     pred_train = classifier.decision_function(train_features)
@@ -162,11 +162,11 @@ def _compute(cost, cfg, logger,
     metrics.update(compute_accuracy_metrics(pred_test, val_labels[:, None], prefix='test_'))
     logger.add_line(f"Audio Linear SVM on {cfg['dataset']['name']} cost: {cost}")
     for metric in metrics:
-        logger.add_line(f"{metric}: {metrics[metric]}") 
-        
+        logger.add_line(f"{metric}: {metrics[metric]}")
+
     return metrics['test_top1'], metrics['test_top5']
-        
-        
+
+
 def compute_accuracy_metrics(pred, gt, prefix=''):
   order_pred = np.argsort(pred, axis=1)
   assert len(gt.shape) == len(order_pred.shape) == 2
