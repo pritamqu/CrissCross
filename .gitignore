@@ -4,4 +4,3 @@ src/
 checkpointing/
 weights/
 temp*
-train/

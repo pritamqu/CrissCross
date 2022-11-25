@@ -1,0 +1,105 @@
+name: "kinetics400_pretext"
+num_workers: 64 # this will be divided by number of gpus in each node
+num_node: 2 # num_node multiplies batch size
+apex: true # actually using pytorch amp
+apex_opt_level: "O1" # "O0 for FP32 training, O1 for mixed precision training.
+sync_bn: true
+
+progress:
+    print_freq: 10
+    log2tb: true
+    wandb: false
+    wandb_all: false
+
+dataset:
+    name: "kinetics400"
+    fold: 1
+    batch_size: 1024 # num_node * batch_size
+    clip_duration: 0.5
+    video_fps: 16.
+    crop_size: 112 # 112 or 224
+    return_video: true
+    return_audio: true
+    audio_clip_duration: 2          # please see note below
+    audio_fps: 16000.
+    hop_length: 160                 # this is equal to 0.01 sec / 10 ms
+    audio_fps_out: 100              # when hop length is 10 ms, audio_fps_out = 100
+    n_mels: 80                      # ignore this for log-spectrogram
+    n_fft: 1024
+    vid_transform: "strong"   # strong_tc | strong_tr     # combination of [RandomResizedCrop, RandomHorizontalFlip, ColorJitter, RandomGray, RandomGaussianBlur, Cutout]
+    aud_transform: "strong"
+    train:
+        split: "train"
+        mode: "two_clips"        # two_clips | clip | video
+        submode: "overlapped"        # same_timestamp | overlapped | adjacent | random | far_apart
+        clips_per_video: 5
+        aug_mode: 'train'
+        use_shuffle: true
+        drop_last: true
+        vid_aug_kwargs: # ** MSC-HF-CJ-GS-CO **
+            color: [0.4, 0.4, 0.4, 0.2]
+            min_area: 0.08
+            cutout_size: 20 
+            num_of_cutout: 1
+            p_flip: 0.5             # change it to 0 to turn off
+            p_gray: 0.2             # change it to 0 to turn off
+            p_blur: 0.5             # change it to 0 to turn off
+            p_cutout: 1.0           # change it to 0 to turn off
+            pad_missing: false 
+            normalize: true
+            totensor: true
+        aud_aug_kwargs: # ** VJ-MASK-RC **
+            vol: 0.2                    # range in b/w -vol <--> +vol
+            fmask_len: [0, 10]          # act sz = 80 == n_mels
+            tmask_len: [0, 20]          # act sz = 100 == 1 sec audio
+            num_fmask: 2
+            num_tmask: 2
+            wrap_window: 20             # act sz = 100 == 1 sec audio
+            voljitter: true             # change it to false to turn off
+            timewarp: false             # change it to false to turn off
+            fmask: true                 # change it to false to turn off
+            tmask: true                 # change it to false to turn off
+            randcrop: true              # change it to false to turn off
+            normalize: true
+            trim_pad: true
+
+optimizer:
+    name: "adam"
+    apply_larc: true
+    larc_trust_coefficient: 0.001
+    larc_clip: true # If `clip=True` the learning rate is set to `min(optimizer_lr, local_lr)` for each parameter. If `clip=False` the learning rate is set to `local_lr*optimizer_lr`.
+    larc_eps: 1e-8
+    num_epochs: 100 # 100 | 200 |300
+    weight_decay: 0.0001 # play with it
+    momentum: 0.9 # ignored for adam
+    betas: [0.9, 0.999]
+    lr: # single-stage training schedule
+        name: "cosine"
+        warmup_epochs: 2
+        warmup_lr: 0
+        vid_base_lr: 0.0002 # 0.0001(uni)
+        vid_final_lr: 0.0001
+        vid_predictor_lr: 0.002 # 0.001(uni)
+        aud_base_lr: 0.0002 # 0.00001(uni)
+        aud_final_lr: 0.0001
+        aud_predictor_lr: 0.002 # 0.0001(uni)
+        constant_vid_predictor_lr: true # if false pred_lr will be a cosine_lr_scheduler with base pred_lr
+        constant_aud_predictor_lr: true # if false pred_lr will be a cosine_lr_scheduler with base pred_lr
+
+model:
+    name: 'CrissCross'
+    video_backbone: "R2Plus1D"
+    audio_backbone: "ResNet"
+    kwargs:
+        video_depth: 18
+        audio_depth: 18
+        vid_proj_layers: 3 # 2 | 3
+        aud_proj_layers: 3 # 2 | 3
+        joint: true
+        cm: true
+        ctcm: true
+        vid_coeff: 1
+        aud_coeff: 1
+        cm_coeff: 1
+        ct_coeff: 1
+        pre_norm: false

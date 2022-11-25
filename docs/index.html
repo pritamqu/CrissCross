@@ -21,9 +21,9 @@
 <body>
     <br>
     <center>
-        <span style="font-size:46px">Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Synchronicity</span>
+        <span style="font-size:42px">Self-Supervised Audio-Visual Representation Learning with Relaxed Cross-Modal Synchronicity</span>
         <br><br>
-        <span style="font-size:20px">Preprint. Under review.</span>
+        <span style="font-size:24px">AAAI 2023</span>
         <br><br>
         <table align=center>
             <tr>
@@ -36,9 +36,20 @@
 
         <table align=center>
             <tr>
+
                 <td align=center>
                     <center>
-                        <span style="font-size:18px"><a href="https://arxiv.org/pdf/2111.05329.pdf"> [Paper]</a></span>
+                        <span style="font-size:18px"><a href="https://arxiv.org/pdf/2111.05329.pdf"> [Paper]</a></span> <!-- change with aaai link -->
+                    </center>
+                </td>
+                <td align=center>
+                    <center>
+                        <span style="font-size:18px"><a href="./assets/files/crisscross_supp.pdf"> [Appendix]</a></span>
+                    </center>
+                </td>
+                <td align=center>
+                    <center>
+                        <span style="font-size:18px"><a href="https://arxiv.org/pdf/2111.05329.pdf"> [ArXiv]</a></span>
                     </center>
                 </td>
                 <td align=center>
@@ -48,7 +59,7 @@
                 </td>
                 <td align=center>
                     <center>
-                        <span style="font-size:18px"><a href="https://pritamqu.github.io/CrissCross/"> [Project Page]</a></span>
+                        <span style="font-size:18px"><a href="https://pritamqu.github.io/CrissCross/"> [Website]</a></span>
                     </center>
                 </td>
             </tr>
@@ -69,7 +80,10 @@
         </center>
         <tr>
             <p style="text-align: justify;">
-            We present CrissCross, a self-supervised framework for learning audio-visual representations. A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard synchronous cross-modal relations, CrissCross also learns asynchronous cross-modal relationships. We show that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong generalized representations. Our experiments show that strong augmentations for both audio and visual modalities with relaxation of cross-modal temporal synchronicity optimize performance. To pretrain our proposed framework, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics400, and AudioSet. The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and retrieval. CrissCross shows state-of-the-art performances on action recognition (UCF101 and HMDB51) and sound classification (ESC50 and DCASE). The codes and pretrained models are publicly available.</p>
+            We present CrissCross, a self-supervised framework for learning audio-visual representations. A novel notion is introduced in our framework whereby in addition to learning the intra-modal and standard synchronous cross-modal relations, CrissCross also learns asynchronous cross-modal relationships. We perform in-depth studies showing that by relaxing the temporal synchronicity between the audio and visual modalities, the network learns strong generalized representations useful for a variety of downstream tasks. To pretrain our proposed solution, we use 3 different datasets with varying sizes, Kinetics-Sound, Kinetics400, and AudioSet. The learned representations are evaluated on a number of downstream tasks namely action recognition, sound classification, and action retrieval. Our experiments show that CrissCross either outperforms or achieves performances on par with the current state-of-the-art self-supervised methods on action recognition and action retrieval with UCF101 and HMDB51, as well as sound classification with ESC50 and DCASE. Moreover, CrissCross outperforms fully-supervised pretraining while pretrained on Kinetics-Sound. 
+
+            </p>
+
         </tr>
     </table>
     <br>
@@ -121,7 +135,7 @@
         <td>AudioSet</td>
         <td>1.8M</td>
         <td>92.4%</td>
-        <td>66.8%</td>
+        <td>67.4%</td>
         <td>90.5%</td>
         <td>97.0%</td>
         <td><a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/vid_crisscross_audioset.pth.tar.zip">visual</a>; <a href="https://github.com/pritamqu/CrissCross/releases/download/model_weights/aud_crisscross_audioset.pth.tar.zip">audio</a></td>
@@ -140,6 +154,8 @@
         <tr>
             <p style="text-align: justify;">
             We visualize the nearest neighborhoods of video-to-video and audio-to-audio retrieval. We use Kinetics-400 to pretrain CrissCross. The pretrained backbones are then used to extract feature vectors from Kinetics-Sound. We use the Kinetics-Sound for this experiment as it consists of action classes which are prominently manifested both audibly and visually. Next, we use the features extracted from the validation split to query the training features. 
+            <br> 
+            Note: Below, the videos will be directly loaded from YouTube, which may take a bit longer based on the Internet connection. 
             </p>
             <br>
         </tr>
@@ -306,7 +322,7 @@
             </h1>
         </center>
         <tr>
-            <p>We are grateful to <strong>Bank of Montreal</strong> and <strong>Mitacs</strong> for funding this research. We are also thankful to <strong>Vector Institute</strong> and <strong>SciNet HPC Consortium</strong> for helping with the computation resources.</p>
+            <p>We are grateful to <strong>Bank of Montreal</strong> and <strong>Mitacs</strong> for funding this research. We are also thankful to <strong>SciNet HPC Consortium</strong> for helping with the computation resources.</p>
         </tr>
     </table>
     
