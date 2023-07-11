@@ -15,7 +15,7 @@ AAAI 2023
 Ali Etemad
 </h3>
 <h3 align="center"> 
-<a href="https://arxiv.org/pdf/2111.05329.pdf">[Paper]</a> <!-- change with aaai link -->
+<a href="https://doi.org/10.1609/aaai.v37i8.26162">[Paper]</a> <!-- change with aaai link -->
 <a href="./docs/assets/files/crisscross_supp.pdf">[Appendix]</a>  
 <a href="https://arxiv.org/pdf/2111.05329.pdf"> [ArXiv]</a>  
 <!-- <a href="https://github.com/pritamqu/CrissCross/"> [Code]</a>  -->
